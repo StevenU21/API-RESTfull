@@ -7,5 +7,9 @@ use Illuminate\Http\JsonResponse;
 
 class BookController extends Controller
 {
-    //
+    public function index(): JsonResponse
+    {
+        $books = Book::all();
+        return response()->json($books, 200);
+    }
 }
