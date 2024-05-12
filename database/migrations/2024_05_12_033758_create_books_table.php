@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 60)->unique();
-            $table->string('author', 60);
-            $table->string('genre', 30);
+            $table->string('author', 30);
+            $table->string('genre', 20);
             $table->date('publication_year');
-            $table->text('description');
+            $table->text('description', 300);
             $table->float('rate')->default(0);
             $table->integer('likes')->default(0);
             $table->timestamps();
