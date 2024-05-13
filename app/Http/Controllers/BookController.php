@@ -17,4 +17,10 @@ class BookController extends Controller
     {
         return response()->json($book, 200);
     }
+
+    public function destroy(Book $book): JsonResponse
+    {
+        $book->delete();
+        return response()->json(null, 204);
+    }
 }
