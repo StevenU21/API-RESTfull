@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Books\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\JsonResponse;
 
@@ -11,6 +12,12 @@ class BookController extends Controller
     {
         $books = Book::all();
         return response()->json($books, 200);
+    }
+
+    public function store(BookRequest $request): JsonResponse
+    {
+        $book = Book::create($request->validated());
+        return response()->json($book, 201);
     }
 
     public function show(Book $book): JsonResponse
