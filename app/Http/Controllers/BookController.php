@@ -12,4 +12,9 @@ class BookController extends Controller
         $books = Book::all();
         return response()->json($books, 200);
     }
+
+    public function show(Book $book): JsonResponse
+    {
+        return response()->json($book, 200);
+    }
 }
