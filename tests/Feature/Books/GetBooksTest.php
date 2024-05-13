@@ -3,22 +3,21 @@
 namespace Tests\Feature\Books;
 
 use App\Models\Book;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GetBooksTest extends TestCase
 {
-    public function test_get_books(): void
-    {
-        //Capturar todos los libros
-        $books = Book::all();
+    use RefreshDatabase;
 
-        //Si esta vacio llenar con datos de prueba
-        if ($books->isEmpty()) {
-            $books = Book::factory(5)->create();
-        }
+    public function test_get_all_books(): void
+    {
+        //crear 5 datos de prueba
+        $books = Book::factory(5)->create();
 
         //capturar los datos de atraves de la ruta
         $response = $this->getJson('/api/books');
+
         //aseruarse que retorna el codigo de estado de respuesta correcto
         $response->assertStatus(200);
 
