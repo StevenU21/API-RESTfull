@@ -20,6 +20,12 @@ class BookController extends Controller
         return response()->json($book, 201);
     }
 
+    public function update(BookRequest $request, Book $book): JsonResponse
+    {
+        $book->update($request->validated());
+        return response()->json($book, 200);
+    }
+
     public function show(Book $book): JsonResponse
     {
         return response()->json($book, 200);
