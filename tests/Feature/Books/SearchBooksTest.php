@@ -40,7 +40,7 @@ class SearchBooksTest extends TestCase
             Book::create($bookData);
         }
 
-        // Realizar la búsqueda por título o autor
+        // Realizar la búsqueda por el autor
         $response = $this->get('/api/books/search?search=anillos');
 
         // Comprobar que se devuelven los libros correctos
@@ -56,7 +56,7 @@ class SearchBooksTest extends TestCase
             Book::create($bookData);
         }
 
-        // Realizar la búsqueda por título o autor
+        // Realizar la búsqueda por título
         $response = $this->get('/api/books/search?search=anillos');
 
         // Comprobar que se devuelven los libros correctos
@@ -72,7 +72,7 @@ class SearchBooksTest extends TestCase
             Book::create($bookData);
         }
 
-        // Realizar la búsqueda por título o autor
+        // Realizar la búsqueda por  el género
         $response = $this->get('/api/books/search?search=Fantasía');
 
         // Comprobar que se devuelven los libros correctos
