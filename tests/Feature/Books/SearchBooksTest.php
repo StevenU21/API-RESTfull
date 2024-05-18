@@ -11,41 +11,73 @@ class SearchBooksTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_can_search_books()
-    {
-        // Array asociativo con los datos de ambos libros
-        $booksData = [
-            [
-                'title' => 'El señor de los anillos',
-                'author' => 'J.R.R. Tolkien',
-                'genre' => 'Fantasía',
-                'publication_year' => '1954-07-29',
-                'description' => 'Una épica historia de aventuras en un mundo de fantasía.',
-                'rate' => 4.5,
-                'likes' => 100
-            ],
-            [
-                'title' => 'Harry Potter',
-                'author' => 'J.K. Rowling',
-                'genre' => 'Fantasía',
-                'publication_year' => '1997-06-26',
-                'description' => 'La historia del joven mago Harry Potter y sus aventuras en Hogwarts.',
-                'rate' => 4.8,
-                'likes' => 150
-            ]
-        ];
+    // Array asociativo con los datos de ambos libros
+    public $booksData = [
+        [
+            'title' => 'El señor de los anillos',
+            'author' => 'J.R.R. Tolkien',
+            'genre' => 'Fantasía',
+            'publication_year' => '1954-07-29',
+            'description' => 'Una épica historia de aventuras en un mundo de fantasía.',
+            'rate' => 4.5,
+            'likes' => 100
+        ],
+        [
+            'title' => 'Harry Potter',
+            'author' => 'J.K. Rowling',
+            'genre' => 'Fantasía',
+            'publication_year' => '1997-06-26',
+            'description' => 'La historia del joven mago Harry Potter y sus aventuras en Hogwarts.',
+            'rate' => 4.8,
+            'likes' => 150
+        ]
+    ];
 
+    public function test_it_can_search_books_by_author()
+    {
         // Iteramos sobre el array y creamos los libros en la base de datos
-        foreach ($booksData as $bookData) {
+        foreach ($this->booksData as $bookData) {
             Book::create($bookData);
         }
 
         // Realizar la búsqueda por título o autor
-        $response = $this->get('/api/books/search?search=Tolkien');
+        $response = $this->get('/api/books/search?search=anillos');
 
         // Comprobar que se devuelven los libros correctos
         $response->assertJson([
             ['title' => 'El señor de los anillos', 'author' => 'J.R.R. Tolkien'],
+        ]);
+    }
+
+    public function test_it_can_search_books_by_title()
+    {
+        // Iteramos sobre el array y creamos los libros en la base de datos
+        foreach ($this->booksData as $bookData) {
+            Book::create($bookData);
+        }
+
+        // Realizar la búsqueda por título o autor
+        $response = $this->get('/api/books/search?search=anillos');
+
+        // Comprobar que se devuelven los libros correctos
+        $response->assertJson([
+            ['title' => 'El señor de los anillos', 'author' => 'J.R.R. Tolkien'],
+        ]);
+    }
+
+    public function test_it_can_search_books_by_genre()
+    {
+        // Iteramos sobre el array y creamos los libros en la base de datos
+        foreach ($this->booksData as $bookData) {
+            Book::create($bookData);
+        }
+
+        // Realizar la búsqueda por título o autor
+        $response = $this->get('/api/books/search?search=Fantasía');
+
+        // Comprobar que se devuelven los libros correctos
+        $response->assertJson([
+            ['title' => 'El señor de los anillos', 'author' => 'J.R.R. Tolkien', 'genre' => 'Fantasía'],
         ]);
     }
 

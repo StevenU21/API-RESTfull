@@ -26,8 +26,11 @@ class BookController extends Controller
             // Buscar libros que coincidan con el término de búsqueda en el título o el autor
             $books = Book::where('title', 'like', '%' . $searchTerm . '%')
                 ->orWhere('author', 'like', '%' . $searchTerm . '%')
+                ->orWhere('genre', 'like', '%' . $searchTerm . '%')
                 ->get();
         }
+
+
 
         return response()->json($books, 200);
     }
