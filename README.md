@@ -1,67 +1,150 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Books API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta es una API RESTful construida con **Laravel 11**, diseñada para gestionar una colección de libros. Implementa buenas prácticas de desarrollo como el principio de responsabilidad única (SRP) y está basada en pruebas, incluyendo tanto pruebas de características (feature tests) como pruebas unitarias (unit tests).
 
-## About Laravel
+## 📑 Tabla de Contenidos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [🎯 Requisitos](#-requisitos)
+- [⚙️ Instalación](#-instalación)
+- [🛠️ Configuración](#-configuración)
+- [📋 Migraciones](#-migraciones)
+- [🛤️ Rutas de la API](#-rutas-de-la-api)
+- [🛡️ Validación](#-validación)
+- [🧪 Pruebas](#-pruebas)
+- [📜 Licencia](#-licencia)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 🐘 PHP 8.2.14 o superior
+- 📦 Composer
+- 🌐 Laravel 11
+- 🗄️ MySQL o SQLite
 
-## Learning Laravel
+## ⚙️ Instalación
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clona el repositorio:
+   ```sh
+   git clone https://github.com/StevenU21/API-RESTfull
+   cd API-RESTfull
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Instala las dependencias de Composer:
+   ```sh
+   composer install
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Copia el archivo de entorno y configura tus variables de entorno:
+   ```sh
+   cp .env.example .env
+   ```
 
-## Laravel Sponsors
+4. Genera la clave de la aplicación:
+   ```sh
+   php artisan key:generate
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🛠️ Configuración
 
-### Premium Partners
+Configura tu base de datos en el archivo `.env`:
+```env
+DB_CONNECTION=mysql / sqlite
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_de_tu_base_de_datos
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 📋 Migraciones
 
-## Contributing
+Ejecuta las migraciones para crear las tablas necesarias:
+```sh
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```sh
+php artisan migrate:fresh --seed
+```
 
-## Code of Conduct
+## 🛤️ Rutas de la API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Las siguientes rutas están disponibles en esta API:
 
-## Security Vulnerabilities
+- 🔍 Buscar libros:
+  ```http
+  GET /api/books/search
+  ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- 📚 CRUD de libros:
+  ```http
+  GET /api/books
+  POST /api/books
+  GET /api/books/{id}
+  PUT /api/books/{id}
+  DELETE /api/books/{id}
+  ```
 
-## License
+### Ejemplo de Esquema de Base de Datos
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# API-RESTfull" 
+```php
+public function up(): void
+{
+    Schema::create('books', function (Blueprint $table) {
+        $table->increments('id');
+        $table->string('title', 60)->unique();
+        $table->string('author', 30);
+        $table->string('genre', 20);
+        $table->date('publication_year');
+        $table->text('description', 300);
+        $table->float('rate')->default(0);
+        $table->integer('likes')->default(0);
+        $table->timestamps();
+    });
+}
+```
+
+## 🛡️ Validación
+
+Las reglas de validación para los libros son las siguientes:
+
+```php
+public function rules(): array
+{
+    return [
+        'title' => ['required', 'min:6', 'max:60', 'unique:books,title,except,id'],
+        'author' => ['required', 'min:3', 'max:30'],
+        'genre' => ['required', 'min:6', 'max:20'],
+        'publication_year' => ['required', 'date'],
+        'description' => ['required', 'min:3', 'max:300'],
+        'rate' => ['numeric'],
+        'likes' => ['numeric']
+    ];
+}
+```
+
+## 🧪 Pruebas
+
+Este proyecto incluye tanto pruebas de características como pruebas unitarias para asegurar la calidad y funcionalidad del código.
+
+### Pruebas de Características
+
+- `DeleteBooksTest`
+- `GetBooksTest`
+- `SearchBooksTest`
+- `ShowBooksTest`
+- `StoreBooksTest`
+- `UpdateBooksTest`
+
+### Pruebas Unitarias
+
+- `BookRequestTest`
+
+Para ejecutar las pruebas, usa el siguiente comando:
+```sh
+php artisan test
+```
+
+## 📜 Licencia
+
+Este proyecto está licenciado bajo la [MIT License](LICENSE).
+
