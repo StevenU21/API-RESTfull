@@ -29,9 +29,7 @@ class BookController extends Controller
                 ->orWhere('genre', 'like', '%' . $searchTerm . '%')
                 ->get();
         }
-
-
-
+        
         return response()->json($books, 200);
     }
 

@@ -22,7 +22,7 @@ class BookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required', 'min:6', 'max:60', 'unique:books,title,except,id',
+            'title' => ['required', 'min:6', 'max:60', 'unique:books,title,except,id'],
             'author' => ['required', 'min:3', 'max:30'],
             'genre' => ['required', 'min:6', 'max:20'],
             'publication_year' => ['required', 'date'],
